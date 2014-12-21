@@ -63,9 +63,10 @@ run_analysis<-function (){
 
 	# summarize
 	output<-summarize(finalRawData)
-	output
+	
 
 	# export to file
+	export_to_file (output, "assignment_output.txt")
 	
 }
 
@@ -158,4 +159,8 @@ summarize<-function(data){
 	output<-aggregate(meltedData$value, by=list(meltedData$subject_id, meltedData$activity_label, meltedData$variable), FUN=mean)
 	names(output)<-c("subject_id", "activity_label", "feature", "mean") 
 	output
+}
+
+export_to_file<-function(output, filename){
+	 write.table(output, file=filename, row.names=F)
 }
